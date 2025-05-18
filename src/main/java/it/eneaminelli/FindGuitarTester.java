@@ -2,6 +2,9 @@ package it.eneaminelli;
 
 import it.eneaminelli.inventory.Guitar;
 import it.eneaminelli.inventory.Inventory;
+import it.eneaminelli.inventory.guitar_specs.GuitarBuilder;
+import it.eneaminelli.inventory.guitar_specs.GuitarType;
+import it.eneaminelli.inventory.guitar_specs.GuitarWood;
 
 //TODO: correct search functionality, decouple, encapsulate code
 public class FindGuitarTester {
@@ -9,7 +12,7 @@ public class FindGuitarTester {
         Inventory inventory = new Inventory();
         initializeInventory(inventory);
 
-        Guitar whatCustomerLikes = new Guitar("", 0, "fender", "stratocastor", "electric", "Alder", "Alder");
+        Guitar whatCustomerLikes = new Guitar("", 0, GuitarBuilder.FENDER, "stratocastor", GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER);
 
         Guitar guitar = inventory.search(whatCustomerLikes);
 
@@ -22,6 +25,6 @@ public class FindGuitarTester {
     }
 
     private static void initializeInventory(Inventory inventory) {
-        inventory.addGuitar( "12345", 999.99, "Fender", "Stratocaster", "electric", "Alder", "Alder");
+        inventory.addGuitar( "12345", 999.99, GuitarBuilder.FENDER, "stratocastor", GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER);
     }
 }
