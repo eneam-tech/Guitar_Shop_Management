@@ -20,7 +20,11 @@ public class FindGuitarTester {
 
         List<Guitar> availableGuitars = inventory.search(whatCustomerLikes);
 
-        System.out.println(listGuitars(availableGuitars));
+        String listedGuitars = listGuitars(availableGuitars);
+
+        System.out.println(listedGuitars);
+
+
     }
 
     private static void initializeInventory(Inventory inventory) {
@@ -34,11 +38,17 @@ public class FindGuitarTester {
 
     public static String listGuitars(List<Guitar> availableGuitars){
         String returnGuitar = "";
-        for(Guitar availableGuitar : availableGuitars){
-            String c = (" - You might like this " + availableGuitar.getBuilder() + " " + availableGuitar.getType() + " guitar." + " It has " +
-            availableGuitar.getBackWood() + " back and sides, " + availableGuitar.getTopWood() + " top.\n    You can have it for " + availableGuitar.getPrice() + " euros!\n");
-            returnGuitar = returnGuitar.concat(c);
+        String noGuitar = "Sorry, no such guitar in stock";
+
+        if(!availableGuitars.isEmpty()){
+            for(Guitar availableGuitar : availableGuitars){
+                String c = (" - You might like this " + availableGuitar.getBuilder() + " " + availableGuitar.getType() + " guitar." + " It has " +
+                availableGuitar.getBackWood() + " back and sides, " + availableGuitar.getTopWood() + " top.\n    You can have it for " + availableGuitar.getPrice() + " euros!\n");
+                returnGuitar = returnGuitar.concat(c);
+            }
+            return returnGuitar;
+        } else {
+            return noGuitar;
         }
-        return returnGuitar;
     }
 }
