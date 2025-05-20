@@ -4,10 +4,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import it.eneaminelli.inventory.guitar_specs.GuitarBuilder;
 import it.eneaminelli.inventory.guitar_specs.GuitarSpec;
-import it.eneaminelli.inventory.guitar_specs.GuitarType;
-import it.eneaminelli.inventory.guitar_specs.GuitarWood;
 
 /**
  * The {@code Inventory} class manages a collection of {@link Guitar} objects.
@@ -37,8 +34,8 @@ public class Inventory {
      * @param backWood the type of wood used for the back of the guitar
      * @param topWood the type of wood used for the top of the guitar
      */
-    public void addGuitar(String serialNumber, double price, GuitarBuilder builder, String model, GuitarType type, GuitarWood backWood, GuitarWood topWood) {
-        Guitar guitar = new Guitar(serialNumber, price, builder, model, type, backWood, topWood);
+    public void addGuitar(String serialNumber, double price, GuitarSpec guitarSpec) {
+        Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
         guitars.add(guitar);
     }
 
@@ -65,26 +62,13 @@ public class Inventory {
         for(Iterator i = guitars.iterator(); i.hasNext();){
             Guitar guitar = (Guitar)i.next();
             GuitarSpec guitarSpec = guitar.getGuitarSpec();
-            //Ignore S/N since unique
-            //Ignore price
-            if(searchSpec.getBuilder() != guitarSpec.getBuilder()){
-                continue;
-            }
-            String model = searchSpec.getModel();
-            if((model != null) && (!model.equals("")) && (!model.equals(guitarSpec.getModel()))) {
-                continue;
-            }
-            if(searchSpec.getType() != guitarSpec.getType()) {
-                continue;
-            }
-            if (searchSpec.getBackWood() != guitarSpec.getBackWood()) {
-                continue;
-            }
-            if (searchSpec.getTopWood() != guitarSpec.getTopWood()) {
-                continue;
+
+            if(guitarSpec.compareItems(searchSpec)){
+
+                matchingGuitars.add(guitar);
             }
 
-            matchingGuitars.add(guitar);
+
         }
 
         return matchingGuitars;

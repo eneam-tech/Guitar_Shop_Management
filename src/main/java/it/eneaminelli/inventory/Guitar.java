@@ -1,9 +1,6 @@
 package it.eneaminelli.inventory;
 
-import it.eneaminelli.inventory.guitar_specs.GuitarBuilder;
 import it.eneaminelli.inventory.guitar_specs.GuitarSpec;
-import it.eneaminelli.inventory.guitar_specs.GuitarType;
-import it.eneaminelli.inventory.guitar_specs.GuitarWood;
 
 /**
  * Represents a guitar in the inventory with all its specifications.
@@ -34,10 +31,10 @@ public class Guitar {
      * @param backWood the wood used for the back
      * @param topWood the wood used for the top
      */
-    public Guitar(String serialNumber, double price, GuitarBuilder builder, String model, GuitarType type, GuitarWood backWood, GuitarWood topWood) {
+    public Guitar(String serialNumber, double price, GuitarSpec guitarSpec) {
         this.serialNumber = serialNumber;
         this.price = price;
-        this.guitarSpec = new GuitarSpec(builder, model, type, topWood, backWood);
+        this.guitarSpec = guitarSpec;
     }
 
     /**
