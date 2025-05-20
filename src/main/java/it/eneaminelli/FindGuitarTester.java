@@ -20,18 +20,7 @@ public class FindGuitarTester {
 
         List<Guitar> availableGuitars = inventory.search(whatCustomerLikes);
 
-        if(availableGuitars!= null){
-            /* System.out.println("You might like this " + guitar.getBuilder() + " " + guitar.getType() + " guitar:\n" + 
-            guitar.getBackWood() + " back and sides, " + guitar.getTopWood() + " top.\n You can have it for " + guitar.getPrice() + " euros!"); */
-
-            System.out.println("This is a list of compatible guitars: ");
-            for (Guitar availableGuitar : availableGuitars) {
-                System.out.println(" - You might like this " + availableGuitar.getBuilder() + " " + availableGuitar.getType() + " guitar." + " It has " +
-                availableGuitar.getBackWood() + " back and sides, " + availableGuitar.getTopWood() + " top.\n    You can have it for " + availableGuitar.getPrice() + " euros!");
-            }
-        } else {
-            System.out.println("Sorry, no such guitar in stock.");
-        }
+        System.out.println(listGuitars(availableGuitars));
     }
 
     private static void initializeInventory(Inventory inventory) {
@@ -41,5 +30,15 @@ public class FindGuitarTester {
         inventory.addGuitar( "12345", 999.99, GuitarBuilder.FENDER, "stratocastor", GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER);
         inventory.addGuitar( "12345", 999.99, GuitarBuilder.FENDER, "stratocastor", GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER);
         
+    }
+
+    public static String listGuitars(List<Guitar> availableGuitars){
+        String returnGuitar = "";
+        for(Guitar availableGuitar : availableGuitars){
+            String c = (" - You might like this " + availableGuitar.getBuilder() + " " + availableGuitar.getType() + " guitar." + " It has " +
+            availableGuitar.getBackWood() + " back and sides, " + availableGuitar.getTopWood() + " top.\n    You can have it for " + availableGuitar.getPrice() + " euros!\n");
+            returnGuitar = returnGuitar.concat(c);
+        }
+        return returnGuitar;
     }
 }
