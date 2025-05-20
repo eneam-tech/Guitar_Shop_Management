@@ -1,6 +1,7 @@
 package it.eneaminelli.inventory;
 
 import it.eneaminelli.inventory.guitar_specs.GuitarBuilder;
+import it.eneaminelli.inventory.guitar_specs.GuitarSpec;
 import it.eneaminelli.inventory.guitar_specs.GuitarType;
 import it.eneaminelli.inventory.guitar_specs.GuitarWood;
 
@@ -13,23 +14,14 @@ public class Guitar {
     /** Unique identifier for the guitar */
     private String serialNumber;
 
-    /** Model name of the guitar */
-    private String model;
-
-    /** Brand or builder of the guitar */
-    private final GuitarBuilder builder;
-
-    /** Type of the guitar (e.g., acoustic, electric) */
-    private final GuitarType type;
-
-    /** Type of wood used for the back of the guitar */
-    private final GuitarWood backWood;
-
-    /** Type of wood used for the top of the guitar */
-    private final GuitarWood topWood;
-
     /** Price of the guitar */
     private double price;
+
+    /**
+     * Technical specification for the guitar:
+     * builder, model, type and wood
+     */
+    private GuitarSpec guitarSpec;
 
     /**
      * Constructs a new {@code Guitar} with the given specifications.
@@ -45,11 +37,7 @@ public class Guitar {
     public Guitar(String serialNumber, double price, GuitarBuilder builder, String model, GuitarType type, GuitarWood backWood, GuitarWood topWood) {
         this.serialNumber = serialNumber;
         this.price = price;
-        this.builder = builder;
-        this.model = model;
-        this.type = type;
-        this.backWood = backWood;
-        this.topWood = topWood;
+        this.guitarSpec = new GuitarSpec(builder, model, type, topWood, backWood);
     }
 
     /**
@@ -59,51 +47,6 @@ public class Guitar {
      */
     public String getSerialNumber() {
         return serialNumber;
-    }
-
-    /**
-     * Gets the model name of the guitar.
-     *
-     * @return the model name
-     */
-    public String getModel() {
-        return model;
-    }
-
-    /**
-     * Gets the builder (brand) of the guitar.
-     *
-     * @return the guitar builder
-     */
-    public GuitarBuilder getBuilder() {
-        return builder;
-    }
-
-    /**
-     * Gets the type of the guitar.
-     *
-     * @return the guitar type
-     */
-    public GuitarType getType() {
-        return type;
-    }
-
-    /**
-     * Gets the wood type used for the back of the guitar.
-     *
-     * @return the back wood
-     */
-    public GuitarWood getBackWood() {
-        return backWood;
-    }
-
-    /**
-     * Gets the wood type used for the top of the guitar.
-     *
-     * @return the top wood
-     */
-    public GuitarWood getTopWood() {
-        return topWood;
     }
 
     /**
@@ -122,5 +65,12 @@ public class Guitar {
      */
     public double getPrice() {
         return price;
+    }
+    /**
+     * Gets the technical specification of the guitar
+     * @return builder, model, type, top and back wood of the guitar
+     */
+    public GuitarSpec getGuitarSpec(){
+        return guitarSpec;
     }
 }

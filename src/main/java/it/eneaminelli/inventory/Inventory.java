@@ -5,6 +5,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import it.eneaminelli.inventory.guitar_specs.GuitarBuilder;
+import it.eneaminelli.inventory.guitar_specs.GuitarSpec;
 import it.eneaminelli.inventory.guitar_specs.GuitarType;
 import it.eneaminelli.inventory.guitar_specs.GuitarWood;
 
@@ -59,26 +60,27 @@ public class Inventory {
 
 
 
-    public List<Guitar> search (Guitar searchGuitar){
+    public List<Guitar> search (GuitarSpec searchSpec){
         List<Guitar> matchingGuitars = new LinkedList();
         for(Iterator i = guitars.iterator(); i.hasNext();){
             Guitar guitar = (Guitar)i.next();
+            GuitarSpec guitarSpec = guitar.getGuitarSpec();
             //Ignore S/N since unique
             //Ignore price
-            if(searchGuitar.getBuilder() != guitar.getBuilder()){
+            if(searchSpec.getBuilder() != guitarSpec.getBuilder()){
                 continue;
             }
-            String model = searchGuitar.getModel();
-            if((model != null) && (!model.equals("")) && (!model.equals(guitar.getModel()))) {
+            String model = searchSpec.getModel();
+            if((model != null) && (!model.equals("")) && (!model.equals(guitarSpec.getModel()))) {
                 continue;
             }
-            if(searchGuitar.getType() != guitar.getType()) {
+            if(searchSpec.getType() != guitarSpec.getType()) {
                 continue;
             }
-            if (searchGuitar.getBackWood() != guitar.getBackWood()) {
+            if (searchSpec.getBackWood() != guitarSpec.getBackWood()) {
                 continue;
             }
-            if (searchGuitar.getTopWood() != guitar.getTopWood()) {
+            if (searchSpec.getTopWood() != guitarSpec.getTopWood()) {
                 continue;
             }
 

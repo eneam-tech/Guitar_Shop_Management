@@ -5,6 +5,7 @@ import java.util.List;
 import it.eneaminelli.inventory.Guitar;
 import it.eneaminelli.inventory.Inventory;
 import it.eneaminelli.inventory.guitar_specs.GuitarBuilder;
+import it.eneaminelli.inventory.guitar_specs.GuitarSpec;
 import it.eneaminelli.inventory.guitar_specs.GuitarType;
 import it.eneaminelli.inventory.guitar_specs.GuitarWood;
 
@@ -14,7 +15,7 @@ public class FindGuitarTester {
         Inventory inventory = new Inventory();
         initializeInventory(inventory);
 
-        Guitar whatCustomerLikes = new Guitar("", 0, GuitarBuilder.FENDER, "stratocastor", GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER);
+        GuitarSpec whatCustomerLikes = new GuitarSpec(GuitarBuilder.FENDER, "stratocastor", GuitarType.ELECTRIC, GuitarWood.ALDER, GuitarWood.ALDER);
 
         //Guitar guitar = inventory.search(whatCustomerLikes);
 
@@ -42,8 +43,8 @@ public class FindGuitarTester {
 
         if(!availableGuitars.isEmpty()){
             for(Guitar availableGuitar : availableGuitars){
-                String c = (" - You might like this " + availableGuitar.getBuilder() + " " + availableGuitar.getType() + " guitar." + " It has " +
-                availableGuitar.getBackWood() + " back and sides, " + availableGuitar.getTopWood() + " top.\n    You can have it for " + availableGuitar.getPrice() + " euros!\n");
+                String c = (" - You might like this " + availableGuitar.getGuitarSpec().getBuilder() + " " + availableGuitar.getGuitarSpec().getType() + " guitar." + " It has " +
+                availableGuitar.getGuitarSpec().getBackWood() + " back and sides, " + availableGuitar.getGuitarSpec().getTopWood() + " top.\n    You can have it for " + availableGuitar.getPrice() + " euros!\n");
                 returnGuitar = returnGuitar.concat(c);
             }
             return returnGuitar;
