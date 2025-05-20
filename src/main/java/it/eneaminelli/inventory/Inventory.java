@@ -57,45 +57,34 @@ public class Inventory {
         return null;
     }
 
-    /**
-     * Searches for a guitar in the inventory that matches the specifications of the given {@code searchGuitar}.
-     * <p>
-     * The comparison ignores serial number and price. All other fields must match exactly using enum identity
-     * and string equality for the model (case-insensitive).
-     *
-     * @param searchGuitar the guitar with the desired specifications
-     * @return the first matching guitar found, or {@code null} if no match is found
-     */
-    public Guitar search(Guitar searchGuitar) {
-        for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
-            Guitar guitar = i.next();
 
-            // Ignore serial number and price
 
-            if (searchGuitar.getBuilder() != guitar.getBuilder()) {
+    public List<Guitar> search (Guitar searchGuitar){
+        List<Guitar> matchingGuitars = new LinkedList();
+        for(Iterator i = guitars.iterator(); i.hasNext();){
+            Guitar guitar = (Guitar)i.next();
+            //Ignore S/N since unique
+            //Ignore price
+            if(searchGuitar.getBuilder() != guitar.getBuilder()){
                 continue;
             }
-
-            String model = searchGuitar.getModel().toLowerCase();
-            if ((model != null) && (!model.equals("")) && (!model.equals(guitar.getModel().toLowerCase()))) {
+            String model = searchGuitar.getModel();
+            if((model != null) && (!model.equals("")) && (!model.equals(guitar.getModel()))) {
                 continue;
             }
-
-            if (searchGuitar.getType() != guitar.getType()) {
+            if(searchGuitar.getType() != guitar.getType()) {
                 continue;
             }
-
             if (searchGuitar.getBackWood() != guitar.getBackWood()) {
                 continue;
             }
-
             if (searchGuitar.getTopWood() != guitar.getTopWood()) {
                 continue;
             }
 
-            return guitar;
+            matchingGuitars.add(guitar);
         }
 
-        return null;
+        return matchingGuitars;
     }
 }
