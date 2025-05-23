@@ -1,9 +1,9 @@
-package it.eneaminelli.inventory.guitar_specs;
+package it.eneaminelli.inventory.instruments.technicalspec;
 
 /**
  * Enum representing the various types of guitars in stock.
  */
-public enum GuitarType {
+public enum InstrumentType {
     ACOUSTIC, ELECTRIC;
 
     /**
@@ -13,7 +13,7 @@ public enum GuitarType {
      */
     public static String getType(){
         StringBuilder sb = new StringBuilder();
-        for (GuitarType type : GuitarType.values()){
+        for (InstrumentType type : InstrumentType.values()){
             sb.append("- ").append(type.toString()).append("\n");
         }
         return sb.toString();

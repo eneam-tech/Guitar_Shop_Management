@@ -1,10 +1,10 @@
-package it.eneaminelli.inventory.guitar_specs;
+package it.eneaminelli.inventory.instruments.technicalspec;
 
 /**
  * Enum representing the various builders (brands) of guitars.
  * Each value corresponds to a different manufacturer or a generic placeholder (ANY).
  */
-public enum GuitarBuilder {
+public enum InstrumentBuilder {
     
     FENDER, MARTIN, GIBSON, COLLINGS, OLSON, RYAN, PRS, ANY;
 
@@ -15,7 +15,7 @@ public enum GuitarBuilder {
      */
     public static String getBuilders() {
         StringBuilder sb = new StringBuilder();
-        for (GuitarBuilder builder : GuitarBuilder.values()) {
+        for (InstrumentBuilder builder : InstrumentBuilder.values()) {
             sb.append("- ").append(builder.toString()).append("\n");
         }
         return sb.toString();

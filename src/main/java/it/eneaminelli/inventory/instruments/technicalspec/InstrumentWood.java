@@ -1,10 +1,10 @@
-package it.eneaminelli.inventory.guitar_specs;
+package it.eneaminelli.inventory.instruments.technicalspec;
 
 /**
  * Enum representing the various wood varieties of guitars.
  * Each value corresponds to a different kind of wood.
  */
-public enum GuitarWood {
+public enum InstrumentWood {
     CEDAR, MAHOGANY, MAPLE, ALDER, SITKA;
 
     /**
@@ -14,7 +14,7 @@ public enum GuitarWood {
      */
     public static String getWoods(){
         StringBuilder sb = new StringBuilder();
-        for (GuitarWood wood : GuitarWood.values()){
+        for (InstrumentWood wood : InstrumentWood.values()){
             sb.append("- ").append(wood.toString()).append("\n");
         }
         return sb.toString();

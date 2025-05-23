@@ -4,73 +4,68 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-import it.eneaminelli.inventory.guitar_specs.GuitarSpec;
+import it.eneaminelli.inventory.instruments.MusicalInstrument;
+import it.eneaminelli.inventory.instruments.technicalspec.InstrumentSpec;
 
 /**
- * The {@code Inventory} class manages a collection of {@link Guitar} objects.
- * It provides functionality to add guitars, retrieve a guitar by serial number,
- * and search for guitars that match certain specifications.
+ * Manages a collection of musical instruments.
+ * Provides functionality to add instruments, retrieve them by serial number,
+ * and search for matching instruments based on specific criteria.
  */
 public class Inventory {
 
-    /** The list of guitars in the inventory. */
-    private List<Guitar> guitars;
+    /** A list that holds all the instruments in the inventory. */
+    private List inventory;
 
     /**
      * Constructs an empty inventory.
      */
     public Inventory() {
-        guitars = new LinkedList<>();
+        inventory = new LinkedList();
     }
 
     /**
-     * Adds a new {@link Guitar} to the inventory.
+     * Adds a new instrument to the inventory.
      *
-     * @param serialNumber the serial number of the guitar
-     * @param price the price of the guitar
-     * @param builder the builder (brand) of the guitar
-     * @param model the model of the guitar
-     * @param type the type of the guitar (e.g., electric or acoustic)
-     * @param backWood the type of wood used for the back of the guitar
-     * @param topWood the type of wood used for the top of the guitar
+     * @param serialNumber the unique identifier of the instrument
+     * @param price the price of the instrument
+     * @param spec the specifications describing the instrument
      */
-    public void addGuitar(String serialNumber, double price, GuitarSpec guitarSpec) {
-        Guitar guitar = new Guitar(serialNumber, price, guitarSpec);
-        guitars.add(guitar);
+    public void addInstrument(String serialNumber, double price, InstrumentSpec spec) {
+        MusicalInstrument instrument = new MusicalInstrument(serialNumber, price, spec);
+        inventory.add(instrument);
     }
 
     /**
-     * Retrieves a {@link Guitar} from the inventory by its serial number.
+     * Retrieves a musical instrument from the inventory by its serial number.
      *
-     * @param serialNumber the serial number of the guitar to retrieve
-     * @return the matching guitar, or {@code null} if not found
+     * @param serialNumber the unique identifier of the instrument
+     * @return the instrument with the matching serial number, or null if not found
      */
-    public Guitar getGuitar(String serialNumber){
-        for (Iterator<Guitar> i = guitars.iterator(); i.hasNext();) {
-            Guitar guitar = i.next();
-            if (guitar.getSerialNumber().equals(serialNumber)) {
-                return guitar;
+    public MusicalInstrument get(String serialNumber) {
+        for (Iterator i = inventory.iterator(); i.hasNext(); ) {
+            MusicalInstrument instrument = (MusicalInstrument) i.next();
+            if (instrument.getSerialNumber().equals(serialNumber)) {
+                return instrument;
             }
         }
         return null;
     }
 
-
-
-    public List<Guitar> search (GuitarSpec searchSpec){
-        List<Guitar> matchingGuitars = new LinkedList();
-        for(Iterator i = guitars.iterator(); i.hasNext();){
-            Guitar guitar = (Guitar)i.next();
-            GuitarSpec guitarSpec = guitar.getGuitarSpec();
-
-            if(guitarSpec.compareItems(searchSpec)){
-
-                matchingGuitars.add(guitar);
+    /**
+     * Searches the inventory for instruments matching the given specification.
+     *
+     * @param searchSpec the specifications to match against
+     * @return a list of instruments that match the given specification
+     */
+    public List search(InstrumentSpec searchSpec) {
+        List matchingInstruments = new LinkedList();
+        for (Iterator i = inventory.iterator(); i.hasNext(); ) {
+            MusicalInstrument instrument = (MusicalInstrument) i.next();
+            if (instrument.getInstrumentSpec().matches(searchSpec)) {
+                matchingInstruments.add(instrument);
             }
-
-
         }
-
-        return matchingGuitars;
+        return matchingInstruments;
     }
 }
